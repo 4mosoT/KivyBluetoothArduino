@@ -1,3 +1,4 @@
+#qpy:kivy
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
 from screens.menu_screen import Menu_Screen

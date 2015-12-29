@@ -2,7 +2,6 @@ from kivy.uix.screenmanager import Screen
 from kivy.graphics import Color, Rectangle
 from buttons.menu_button import Menu_Button
 from kivy.uix.label import Label
-import bluet
 
 
 class Bluetooth_Screen(Screen):

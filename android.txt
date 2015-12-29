@@ -1,0 +1,4 @@
+title=Bluet
+author=Skalextric
+orientation=landscape
+fullscreen=1
