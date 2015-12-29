@@ -30,4 +30,4 @@ class Bluetooth_Screen(Screen):
         self.blue_label.text = "Searching for devices..."
         discovered = bluet.discover()
         self.blue_label.text = str(discovered)
-        #TODO: Discover devices in a paralell threading.
+        #TODO: Discover devices within paralell threading.
