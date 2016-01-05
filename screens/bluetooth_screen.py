@@ -69,7 +69,8 @@ class Bluetooth_Screen(Screen):
 
 
     def item_selected(self, *args):
-        text = 'Device selected MAC: ' + args[0].data[0].mac_addr
+        selected_item= args[0].data[0]
+        text = 'Device selected MAC: ' + selected_item.mac_addr
         self.info_label.text = text
 
 
