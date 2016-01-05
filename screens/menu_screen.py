@@ -23,7 +23,7 @@ class Menu_Screen(Screen):
 
         # Menu Layout and Buttons
         buttons_grid = GridLayout(cols=1, size_hint=[0.3, 0.1],
-                                  pos_hint={'center_x': self.center_x, 'center_y': self.center_y})
+                                  pos_hint={'center_x': .5, 'center_y': .5})
 
         button_1 = Menu_Button(text='Bluetooth', screenmanager=self.manager, screen='bluetooth')
         buttons_grid.add_widget(button_1)

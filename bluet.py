@@ -32,4 +32,14 @@ def discover():
     else:
         return bluetooth.discover_devices()
 
+def get_name(mac):
+    return bluetooth.lookup_name(mac)
+
+
+def discover_thread(queue):
+    discovered = discover()
+    dict = {}
+    for x in discovered:
+        dict[x] = get_name(x)
+    queue.put(dict)
 
