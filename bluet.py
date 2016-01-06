@@ -35,6 +35,14 @@ def discover():
 def get_name(mac):
     return bluetooth.lookup_name(mac)
 
+def connect(bd_addr, port):
+    sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    sock.connect((bd_addr, port))
+    sock.send("Hello_World")
+    sock.close()
+    print 'Connected'
+
+
 
 def discover_thread(queue):
     discovered = discover()
