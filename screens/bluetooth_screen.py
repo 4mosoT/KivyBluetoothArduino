@@ -103,7 +103,8 @@ class Bluetooth_Screen(Screen):
     def connect(self, *args):
         self.bt_socket = bluet.connect(self.selected_item.mac_addr, 1)
         self.send_text.disabled = False
+        self.info_label.text = 'Connected'
 
     def send(self, *args):
-        self.bt_socket.send(self.send_text.text)
+        self.bt_socket.send(self.send_text.text + '\n')
 
