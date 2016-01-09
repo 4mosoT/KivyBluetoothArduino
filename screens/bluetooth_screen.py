@@ -6,6 +6,7 @@ from kivy.uix.listview import ListItemButton, ListView
 from kivy.adapters.listadapter import ListAdapter
 from kivy.clock import Clock
 from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
 import bluet
 from threading import Thread
 import Queue
@@ -49,12 +50,18 @@ class Bluetooth_Screen(Screen):
         self.connect_button.bind(on_press=self.connect)
         self.add_widget(self.connect_button)
 
+        self.send_text = TextInput(text='Insert text to send', size_hint=(None, None), size=(200, 30),
+                                   pos_hint={'center_x': .5}, multiline=False, disabled= True)
+        self.send_text.bind(on_text_validate=self.send)
+        self.add_widget(self.send_text)
+
         self.bind(size=self.update)
 
     def update(self, *args):
         self.rect.size = self.size
         self.discovered_list.pos_hint = {'center_x': .5, 'center_y': .5}
         self.info_label.pos_hint = {'center_y': .8, 'center_x': .5}
+        self.send_text.y = self.y + 30
 
     def builder(self):
         self.add_widget(Menu_Button(size_hint=[.1, .1], text='Go Back', screenmanager=self.manager, screen='menu'))
@@ -84,15 +91,19 @@ class Bluetooth_Screen(Screen):
             Clock.unschedule(self.discover)
 
     def item_selected(self, *args):
-            try:
-                self.selected_item = args[0].selection[0]
-                text = 'Device selected MAC: ' + self.selected_item.mac_addr
-                self.info_label.text = text
-                self.connect_button.disabled = False
-            except:
-                self.info_label.text = "No device selected"
-                self.connect_button.disabled = True
+        try:
+            self.selected_item = args[0].selection[0]
+            text = 'Device selected MAC: ' + self.selected_item.mac_addr
+            self.info_label.text = text
+            self.connect_button.disabled = False
+        except:
+            self.info_label.text = "No device selected"
+            self.connect_button.disabled = True
 
     def connect(self, *args):
-        bluet.connect(self.selected_item.mac_addr, 1)
+        self.bt_socket = bluet.connect(self.selected_item.mac_addr, 1)
+        self.send_text.disabled = False
+
+    def send(self, *args):
+        self.bt_socket.send(self.send_text.text)
 
